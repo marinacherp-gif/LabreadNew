@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Secrets — NEVER commit these
+.env
+.env.local
+.env*.local
+
+# Next.js build output
+.next/
+out/
+
+# Prisma generated client
+prisma/generated/
+
+# OS files
+.DS_Store
+Thumbs.db

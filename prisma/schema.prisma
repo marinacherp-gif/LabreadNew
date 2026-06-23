@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  VIEWER
+}
+
+enum ClientRating {
+  FIRST_TIMER
+  CASUAL
+  FREQUENT
+}
+
+enum OrderStatus {
+  OPEN
+  PAUSED
+  DONE
+  CANCELED
+}
+
+enum PaymentStatus {
+  PAID
+  NOT_PAID
+}
+
+enum ProductCategory {
+  BREAD
+  PASTRY
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  role      Role     @default(VIEWER)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
+
+model Product {
+  id                String      @id @default(cuid())
+  name              String
+  description       String?     @db.VarChar(200)
+  price             Decimal     @db.Decimal(10, 2)
+  pictureUrl        String?
+  availableDays     String[]
+  isVegan           Boolean     @default(false)
+  containsAllergens Boolean     @default(false)
+  containsDairy     Boolean     @default(false)
+  stockAmount       Int         @default(0)
+  isActive          Boolean     @default(true)
+  category          ProductCategory?
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  orderItems OrderItem[]
+
+  @@index([isActive])
+}
+
+model Order {
+  id            String        @id @default(cuid())
+  clientName    String
+  clientPhone   String
+  clientRating  ClientRating  @default(FIRST_TIMER)
+  status        OrderStatus   @default(OPEN)
+  paymentStatus PaymentStatus @default(NOT_PAID)
+  totalPrice    Decimal       @db.Decimal(10, 2)
+  deliveryDate  DateTime      @db.Date
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  orderItems OrderItem[]
+
+  @@index([deliveryDate])
+  @@index([status])
+  @@index([clientPhone])
+}
+
+model OrderItem {
+  id              String  @id @default(cuid())
+  orderId         String
+  productId       String
+  quantity        Int
+  priceAtPurchase Decimal @db.Decimal(10, 2)
+
+  order   Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+// Singleton — always id=1
+model BakeryConfig {
+  id                   Int      @id @default(1)
+  workingHours         Json     @default("{}")
+  specialAnnouncements String?  @db.Text
+  updatedAt            DateTime @updatedAt
+}
