@@ -12,7 +12,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
 
   return (
     <LanguageProvider storageKey="admin_lang">
-      <div className="flex min-h-screen bg-brand-50">
+      <div className="flex flex-col md:flex-row min-h-screen bg-brand-50">
         <AdminSidebar
           userEmail={session.user.email}
           userRole={session.user.role}

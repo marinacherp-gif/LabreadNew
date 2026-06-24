@@ -452,25 +452,25 @@ export default function SettingsForm() {
           {DAYS_OF_WEEK.map((day) => {
             const s = schedule[day];
             return (
-              <div key={day} className="flex items-center gap-4 px-6 py-3">
-                <span className="text-sm font-semibold w-10 shrink-0" style={{ color: "#3D2200" }}>
+              <div key={day} className="flex items-center gap-2 sm:gap-4 px-3 sm:px-6 py-3">
+                <span className="text-sm font-semibold w-8 sm:w-10 shrink-0" style={{ color: "#3D2200" }}>
                   {t.settings.dayLabels[day as keyof typeof t.settings.dayLabels]}
                 </span>
                 <Toggle on={s.open} onChange={(v) => setDay(day, { open: v })} />
                 {s.open ? (
-                  <div className="flex items-center gap-2 flex-1">
+                  <div className="flex items-center gap-1 sm:gap-2 flex-1 min-w-0">
                     <input
                       type="time"
                       value={s.from}
                       onChange={(e) => setDay(day, { from: e.target.value })}
-                      className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-32"
+                      className="border border-gray-200 rounded-lg px-2 sm:px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 flex-1 min-w-0"
                     />
                     <span className="text-gray-400 text-sm select-none">—</span>
                     <input
                       type="time"
                       value={s.to}
                       onChange={(e) => setDay(day, { to: e.target.value })}
-                      className="border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-32"
+                      className="border border-gray-200 rounded-lg px-2 sm:px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 flex-1 min-w-0"
                     />
                   </div>
                 ) : (

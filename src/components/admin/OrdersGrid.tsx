@@ -402,7 +402,7 @@ export default function OrdersGrid() {
 
       {/* ── Contextual selection bar (appears when rows are checked) ── */}
       {hasSelection && (
-        <div className="flex items-center gap-3 px-5 py-3 bg-brand-700 text-white rounded-2xl shadow-md animate-in fade-in">
+        <div className="flex flex-wrap items-center gap-2 px-4 py-3 bg-brand-700 text-white rounded-2xl shadow-md animate-in fade-in">
           <span className="text-sm font-semibold tabular-nums">
             {t.orders.selectedCount(selected.size)}
           </span>
@@ -708,7 +708,7 @@ export default function OrdersGrid() {
                       <tr className="bg-amber-50/50">
                         <td colSpan={7} className="px-5 pt-0 pb-4">
                           <div
-                            className="ms-12 rounded-xl overflow-hidden bg-white border border-brand-100"
+                            className="ms-2 sm:ms-12 rounded-xl overflow-hidden bg-white border border-brand-100"
                             style={{ boxShadow: "0 1px 6px rgba(61,34,0,0.07)" }}
                           >
                             {/* Item rows — every row has a divider for clear scanning */}

@@ -121,6 +121,7 @@ export default function UserManagement() {
         ) : users.length === 0 ? (
           <div className="px-6 py-12 text-center text-gray-400">{t.users.noUsers}</div>
         ) : (
+          <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-gray-50 border-b border-gray-100">
               <tr>
@@ -157,6 +158,7 @@ export default function UserManagement() {
               ))}
             </tbody>
           </table>
+          </div>
         )}
       </div>
     </div>

@@ -15,11 +15,14 @@
   html {
     font-family: Inter, system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
 
   body {
     background-color: var(--bg-page);
     color: var(--text-base);
+    overflow-x: hidden;
+    max-width: 100%;
   }
 
   h1, h2, h3, h4 {

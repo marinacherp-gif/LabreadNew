@@ -48,6 +48,12 @@ export default function CheckoutModal({ cart, totalPrice, pickupDate, onClose, o
     e.preventDefault();
     if (!name.trim() || !phone.trim()) { setError(t.shop.errRequired); return; }
 
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length !== 10 || !digits.startsWith("05")) {
+      setError(t.shop.errPhone);
+      return;
+    }
+
     setError("");
     setSubmitting(true);
 
@@ -99,9 +105,9 @@ export default function CheckoutModal({ cart, totalPrice, pickupDate, onClose, o
             <button onClick={onClose} className="text-brand-400 hover:text-brand-700 text-xl leading-none">✕</button>
           </div>
 
-          <div className="overflow-y-auto" style={{ maxHeight: "calc(92dvh - 80px)" }}>
+          <div className="overflow-y-auto overflow-x-hidden" style={{ maxHeight: "calc(92dvh - 80px)" }}>
             {/* Order summary */}
-            <div className="px-6 py-4 bg-brand-50 border-b border-brand-100">
+            <div className="px-4 py-4 bg-brand-50 border-b border-brand-100">
               <p className="text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">{t.shop.yourOrder}</p>
               {cart.map((item) => (
                 <div key={item.product.id} className="flex justify-between text-sm py-1.5">
@@ -118,7 +124,7 @@ export default function CheckoutModal({ cart, totalPrice, pickupDate, onClose, o
             </div>
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="px-6 py-5 space-y-4">
+            <form onSubmit={handleSubmit} className="px-4 py-5 space-y-4">
               {error && (
                 <p className="text-sm text-red-700 bg-red-50 border border-red-100 rounded-xl px-4 py-3">{error}</p>
               )}
@@ -144,7 +150,10 @@ export default function CheckoutModal({ cart, totalPrice, pickupDate, onClose, o
                   type="tel"
                   inputMode="numeric"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value.replace(/[^0-9+\- ]/g, ""))}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^0-9\- ]/g, "");
+                    if (val.replace(/\D/g, "").length <= 10) setPhone(val);
+                  }}
                   required
                   placeholder={t.shop.phonePlaceholder}
                   className="w-full border border-brand-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-400 bg-brand-50"

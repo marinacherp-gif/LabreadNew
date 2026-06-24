@@ -185,8 +185,7 @@ export default function DateSelectionPrompt({
                 >
                   <img src="/labread_logo.jpg" alt="Labread" className="w-full h-full object-cover" />
                 </div>
-                <h2 className="font-bold text-brand-800 text-xl mb-1.5">{t.shop.selectOrderDate}</h2>
-                <p className="text-brand-400 text-sm">{t.shop.selectDateSub}</p>
+                <h2 className="font-bold text-brand-800 text-xl">{t.shop.selectOrderDate}</h2>
               </div>
 
               {/* Date list */}

@@ -592,8 +592,8 @@ export default function ShopPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center"
-      style={{ background: "radial-gradient(ellipse at 30% 10%, #3D1800 0%, #0D0500 65%, #060200 100%)" }}>
+    <div className="flex items-center justify-center"
+      style={{ background: "radial-gradient(ellipse at 30% 10%, #3D1800 0%, #0D0500 65%, #060200 100%)", minHeight: "100dvh", overflowX: "hidden" }}>
 
       <div className="relative flex flex-col bg-brand-50 w-full overflow-hidden"
         dir={dir}
